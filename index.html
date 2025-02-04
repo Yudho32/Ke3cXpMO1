@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player Mirip Videy</title>
+    <title>Video Player dengan Iklan Native</title>
     <style>
         body {
             display: flex;
@@ -20,6 +20,17 @@
         video {
             width: 100%;
             border-radius: 10px;
+        }
+        .ad-banner {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: black;
         }
         .controls {
             position: absolute;
@@ -43,12 +54,23 @@
     </style>
 </head>
 <body>
-        <script async="async" data-cfasync="false" src="//stallsobservance.com/967c794da2dfbcb64dbca348b5719bce/invoke.js"></script>
-<div id="container-967c794da2dfbcb64dbca348b5719bce"></div>
+    <div class="video-container">
+        <div class="ad-banner" id="adBanner"><script async="async" data-cfasync="false" src="//stallsobservance.com/967c794da2dfbcb64dbca348b5719bce/invoke.js"></script>
+<div id="container-967c794da2dfbcb64dbca348b5719bce"></div></div>
+        <video id="video" src="https://cdn.videy.co/Ke3cXpMO1.mp4" controls></video>
+        <div class="controls">
+            <button id="playPause">▶️</button>
+            <button id="stop">⏹️</button>
+            <input type="range" id="seek" value="0" step="0.1">
+        </div>
+    </div>
+    
+    <script>
         const video = document.getElementById('video');
         const playPauseBtn = document.getElementById('playPause');
         const stopBtn = document.getElementById('stop');
         const seekBar = document.getElementById('seek');
+        const adBanner = document.getElementById('adBanner');
 
         playPauseBtn.addEventListener('click', () => {
             if (video.paused) {
@@ -73,6 +95,10 @@
         seekBar.addEventListener('input', () => {
             video.currentTime = (seekBar.value / 100) * video.duration;
         });
+
+        setTimeout(() => {
+            adBanner.style.display = 'none';
+        }, 10000); // Iklan menghilang setelah 10 detik
     </script>
 </body>
 </html>
